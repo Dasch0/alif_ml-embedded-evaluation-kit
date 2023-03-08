@@ -42,7 +42,7 @@ add_library(${ALIF_UI_API_TARGET} STATIC
 
 target_include_directories(${ALIF_UI_API_TARGET} PUBLIC include)
 
-target_link_libraries(${ALIF_UI_API_TARGET} PUBLIC common_api lvgl)
+target_link_libraries(${ALIF_UI_API_TARGET} PUBLIC hal lvgl)
 
 message(STATUS "*******************************************************")
 message(STATUS "Library                                : " ${ALIF_UI_API_TARGET})

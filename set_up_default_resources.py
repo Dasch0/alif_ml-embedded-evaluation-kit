@@ -116,6 +116,10 @@ json_uc_res = [
             {
                 "name": "yolo-fastest_192_face_v4.tflite",
                 "url": "{url_prefix:0}yolo-fastest_192_face_v4.tflite?raw=true",
+            },
+            {
+                "name": "yolox_nano_int8_quantize.tflite",
+                "url": "{url_prefix:0}yolo-fastest_192_face_v4.tflite?raw=true",
             }
         ],
     },
@@ -254,7 +258,7 @@ valid_npu_config_names = [
 ]
 
 # Default NPU configurations (these are always run when the models are optimised)
-default_npu_config_names = [valid_npu_config_names[2], valid_npu_config_names[4]]
+default_npu_config_names = [valid_npu_config_names[2], valid_npu_config_names[3], valid_npu_config_names[4]]
 
 # NPU config named tuple
 NPUConfig = namedtuple(

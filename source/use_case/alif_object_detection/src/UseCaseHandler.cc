@@ -43,8 +43,10 @@
 #include "lv_paint_utils.h"
 
 #define LIMAGE_X        192
-#define LIMAGE_Y        192
+#define LIMAGE_Y        192 
 #define LV_ZOOM         (2 * 256)
+
+bool inference_flag __attribute((section(".bss.inference_flag")));
 
 namespace {
 lv_style_t boxStyle;
@@ -150,6 +152,7 @@ using namespace arm::app::object_detection;
         results.clear();
 
         const uint8_t* currImage = hal_get_image_data(inputImgCols, inputImgRows);
+
         if (!currImage) {
             printf_err("hal_get_image_data failed");
             return false;
@@ -162,6 +165,10 @@ using namespace arm::app::object_detection;
             write_to_lvgl_buf(inputImgCols, inputImgRows,
                             currImage, &lvgl_image[0][0]);
             lv_obj_invalidate(ScreenLayoutImageObject());
+            
+            info("LVGL IMAGE POINTER: %p\n", (void *) &lvgl_image[0][0]);
+            info("LVGL INFERENCE_FLAG POINTER: %p\n", (void *) &inference_flag);
+            inference_flag = true;
 
             if (!run_requested()) {
                lv_led_off(ScreenLayoutLEDObject());
@@ -195,6 +202,7 @@ using namespace arm::app::object_detection;
             /* Draw boxes. */
             DrawDetectionBoxes(results, inputImgCols, inputImgRows);
 
+            inference_flag = false;
         } // ScopedLVGLLock
 
 #if VERIFY_TEST_OUTPUT

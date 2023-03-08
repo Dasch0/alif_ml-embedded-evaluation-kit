@@ -90,6 +90,7 @@ namespace app {
         int err = hal_image_init();
         if (0 != err) {
             printf_err("hal_image_init failed with error: %d\n", err);
+            while(1);
         }
 
         ScreenLayoutInit(lvgl_image, sizeof lvgl_image, LIMAGE_X, LIMAGE_Y, LV_ZOOM);
